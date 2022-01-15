@@ -61,6 +61,7 @@ main{
         margin: auto;
         flex-wrap: wrap;
         justify-content: center;
+        margin-bottom: 2rem;
         // border: red 1px solid;
         .cards{
             display: flex;
@@ -80,6 +81,18 @@ main{
                 /*所有項目依原比例自動延伸，填滿容器*/
                 flex-grow: 1;   
             }
+        }
+    }
+    section#btn{
+        display: flex;
+        margin: auto;
+        margin-bottom: 2rem;
+        button{
+            width: 6.5rem;
+            height: 2rem;
+            // padding: 0.5rem;
+            border: 2px solid #D0D0D0;
+            cursor: pointer;
         }
     }
 }

@@ -99,6 +99,7 @@ main section.images {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-bottom: 2rem;
 }
 
 main section.images .cards {
@@ -126,6 +127,21 @@ main section.images .cards p.cap {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+main section#btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+main section#btn button {
+  width: 6.5rem;
+  height: 2rem;
+  border: 2px solid #D0D0D0;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
