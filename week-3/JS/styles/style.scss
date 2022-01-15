@@ -1,0 +1,195 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 1.25rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3{
+        flex: 15 1 200px;
+        margin: 0.5rem;
+    }
+    
+    nav{
+        flex: 0.8 1 400px;
+        display: flex;
+        justify-content: flex-end;
+        margin: 0.5rem;
+        // border: 1px solid black;
+        label,input{
+            display: none;
+            // border: 1px solid green;
+        }
+        ul{
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            // border: 1px solid red;
+            li{
+                a{
+                    text-decoration: none;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+main{
+    display: flex;
+    flex-direction: column;
+    section.greeting{
+        background-color: #D2E9FF;
+        min-height: 300px;
+        display: flex;
+        margin-bottom: 2.5rem;
+        p{
+            font-size: 2rem;
+            font-weight: 600;
+            margin: auto;
+        }
+    }
+    section.images{
+        width: 60rem;
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+        // border: red 1px solid;
+        .cards{
+            display: flex;
+            flex-direction: column;
+            margin: 0 0.5rem;
+            margin-bottom: 1rem;
+            // border: blue 1px solid;
+            img{
+                max-width: 100%;
+                // border: green 1px solid;
+            }
+            p.cap{
+                text-align: center;
+                background-color: #D2E9FF;
+                padding: 0.5rem;
+                width: 13.75rem;
+                /*所有項目依原比例自動延伸，填滿容器*/
+                flex-grow: 1;   
+            }
+        }
+    }
+}
+@media screen and (max-width: 1200px){
+    main{
+        section.images{
+            width: 90%;
+            // border: red 1px solid;
+            .cards{
+                margin: 0 1rem;
+                margin-bottom: 2rem;
+                // border: blue 1px solid;
+                img{
+                    width: 37vw;  
+                    height: 33vh;
+                    // border: green 1px solid;
+                }
+                p.cap{
+                    width: 37vw; 
+                    padding: 0.8rem; 
+                    // flex-grow: 0;   
+                }
+            }
+        }
+    }  
+}
+@media screen and (max-width: 600px){
+    header{
+        position: relative;
+        // border: red 1px solid;
+        h3{
+            flex: 9 1 10px;
+            // border: green 1px solid;
+        }
+        nav{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap-reverse;
+            flex: 1 1 10px;
+            // border: blue 1px solid;              
+            label{
+                display: flex;
+                width: 35px;
+                height: 35px;
+                vertical-align: middle;
+                // border: red 1px solid;
+                img{
+                    width: 35px;
+                    height: 35px;
+                    vertical-align: middle;
+                    // border: green 1px solid;
+                }
+            }
+            input#switch:checked + ul{
+                display: flex;
+                flex-direction: column;
+                background: #F0F0F0;
+                box-shadow: 0px 1px 3px #00000088;
+                max-height: 220px;
+                transition: .3s;
+            }
+            ul{
+                /*下拉式選單起始位置*/
+                position: absolute;
+                top: 55px;
+                right: 0;
+                /*下拉式選單關閉時的狀態*/
+                width: 100%;
+                max-height: 0px;
+                overflow: hidden;
+
+                // border: green 1px solid;
+                li{
+                    text-align: center;
+                    border-bottom: 1px solid #BEBEBE;
+                    a{
+                        display: block;
+                        padding: 0.5rem 0;
+                        font-size: 1.5rem;
+                        &:hover{
+                            background: #5d5d5d;
+                            color: #FFFFFF;
+                        }
+                    }   
+                }
+            }
+        }
+    }
+    
+    main{
+        section.greeting{
+            p{
+                font-size: 1.8rem;
+            }
+        }
+        section.images{
+            .cards{
+                margin: 0rem;
+                margin-bottom: 2rem;
+                // border: blue 1px solid;
+                img{
+                    width: 85vw;
+                    height: 38vh;
+                    // border: red 1px solid;    
+                }
+                p.cap{
+                    width: 85vw;
+                    // border: green 1px solid;
+                }
+            }
+        }
+    }     
+}

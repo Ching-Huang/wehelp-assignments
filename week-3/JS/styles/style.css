@@ -1,0 +1,238 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 1.25rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header h3 {
+  -webkit-box-flex: 15;
+      -ms-flex: 15 1 200px;
+          flex: 15 1 200px;
+  margin: 0.5rem;
+}
+
+header nav {
+  -webkit-box-flex: 0.8;
+      -ms-flex: 0.8 1 400px;
+          flex: 0.8 1 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: 0.5rem;
+}
+
+header nav label, header nav input {
+  display: none;
+}
+
+header nav ul {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 80%;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main section.greeting {
+  background-color: #D2E9FF;
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 2.5rem;
+}
+
+main section.greeting p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: auto;
+}
+
+main section.images {
+  width: 60rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main section.images .cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0 0.5rem;
+  margin-bottom: 1rem;
+}
+
+main section.images .cards img {
+  max-width: 100%;
+}
+
+main section.images .cards p.cap {
+  text-align: center;
+  background-color: #D2E9FF;
+  padding: 0.5rem;
+  width: 13.75rem;
+  /*所有項目依原比例自動延伸，填滿容器*/
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+@media screen and (max-width: 1200px) {
+  main section.images {
+    width: 90%;
+  }
+  main section.images .cards {
+    margin: 0 1rem;
+    margin-bottom: 2rem;
+  }
+  main section.images .cards img {
+    width: 37vw;
+    height: 33vh;
+  }
+  main section.images .cards p.cap {
+    width: 37vw;
+    padding: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    position: relative;
+  }
+  header h3 {
+    -webkit-box-flex: 9;
+        -ms-flex: 9 1 10px;
+            flex: 9 1 10px;
+  }
+  header nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 10px;
+            flex: 1 1 10px;
+  }
+  header nav label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+  }
+  header nav label img {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+  }
+  header nav input#switch:checked + ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background: #F0F0F0;
+    -webkit-box-shadow: 0px 1px 3px #00000088;
+            box-shadow: 0px 1px 3px #00000088;
+    max-height: 220px;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  header nav ul {
+    /*下拉式選單起始位置*/
+    position: absolute;
+    top: 55px;
+    right: 0;
+    /*下拉式選單關閉時的狀態*/
+    width: 100%;
+    max-height: 0px;
+    overflow: hidden;
+  }
+  header nav ul li {
+    text-align: center;
+    border-bottom: 1px solid #BEBEBE;
+  }
+  header nav ul li a {
+    display: block;
+    padding: 0.5rem 0;
+    font-size: 1.5rem;
+  }
+  header nav ul li a:hover {
+    background: #5d5d5d;
+    color: #FFFFFF;
+  }
+  main section.greeting p {
+    font-size: 1.8rem;
+  }
+  main section.images .cards {
+    margin: 0rem;
+    margin-bottom: 2rem;
+  }
+  main section.images .cards img {
+    width: 85vw;
+    height: 38vh;
+  }
+  main section.images .cards p.cap {
+    width: 85vw;
+  }
+}
+/*# sourceMappingURL=style.css.map */
