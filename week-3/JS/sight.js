@@ -1,10 +1,10 @@
 /***************************************************************  
-    runder   函數=>從sightData陣列中新增每8張景點圖片到網頁上
+    render   函數=>從sightData陣列中新增每8張景點圖片到網頁上
     picIndex 參數=>sightData陣列中的每張圖片索引值(index:0~57)
 ***************************************************************/
-function runder(picIndex){
+function render(picIndex){
     for(let i = picIndex; i < (picIndex+8); i++){
-        /*索引值超過景點筆數就跳出*/
+        /*除錯:索引值超過景點筆數就跳出*/
         if(i >= sightData.length){
             break;
         }
@@ -69,15 +69,15 @@ async function getSight(){
     /*************************************** 
         綁監聽按鈕:每點擊一次，就會新增8張圖片
     ****************************************/
-    let picStartIdx = 8;
+    let FirstPicIdx = 8;
     let btn = document.querySelector('#btn');
     btn.addEventListener('click', e => {
-        runder(picStartIdx);
-        picStartIdx += 8;
+        render(FirstPicIdx);
+        FirstPicIdx += 8;
     })
 
     /*網頁初始的8張景點圖片*/
-    runder(0);
+    render(0);
     
 }
 getSight();
