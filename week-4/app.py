@@ -9,7 +9,7 @@ app.secret_key = "so far so good"
 @app.route('/')
 def index():
     if 'user' in session and session['user'] == "Sign_In": 
-        print('[index]Session key user =',session['user'])
+        print('[index]Session key user =', session['user'])
         return redirect(url_for('success'))
     else:
         return render_template('index.html')
@@ -20,12 +20,12 @@ def success():
         return render_template('success.html')
     else:
         return redirect(url_for('index')) 
-        
-##################################################################################
-# 透過 request 取得條件判斷式所要求的字串資料 message (動態參數)，並命名為變數 data
-# 樣板裡的變數名稱 text 會等同 此 動態參數
-# 動態參數:選擇性的視圖函式參數
-##################################################################################
+
+'''
+透過 request 取得條件判斷式所要求的字串資料 message (動態參數)，並命名為變數 data
+樣板裡的變數名稱 text 會等同 此 動態參數
+動態參數:選擇性的視圖函式參數
+'''
 @app.route('/error/')
 def error():
     data = request.args.get("message", None)
@@ -52,7 +52,7 @@ def signin():
 def signout():
     if 'user' in session:
         session['user'] = "Sign_Out"
-        print('[signout]Session key user =',session['user'])
+        print('[signout]Session key user =', session['user'])
     return redirect(url_for('index')) 
 
 if __name__ == "__main__":    
