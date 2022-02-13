@@ -1,4 +1,3 @@
-from tkinter import Variable
 from flask import Flask, redirect, url_for, render_template, request, session
 
 # 宣告全域變數記錄使用者登入名稱
