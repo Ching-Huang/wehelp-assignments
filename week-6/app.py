@@ -1,8 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 
-# 宣告全域變數記錄使用者登入名稱
-CurrentLoginName  = ''
-
 # 連接到 MySQL 資料庫
 import mysql.connector
 website = mysql.connector.connect(
@@ -47,21 +44,20 @@ app.secret_key = "so far so good"
 #網站的首頁
 @app.route('/')
 def index():
-    if 'user' in session and session['user'] == "Sign_In": 
-        print('[index]Session key user =', session['user'])
+    state = session.get("user")
+    if state != None:
         return redirect(url_for('success'))
     else:
         return render_template('index.html')
 
 @app.route('/member/')
 def success():
-    global CurrentLoginName 
-    MemberName = CurrentLoginName #將先前於 Signin 記錄的會員姓名拿來使用 
-    if 'user' in session and session['user'] == "Sign_In":
-        return render_template('success.html', name = MemberName)
+    state = session.get("user")
+    if state == None:
+        return redirect(url_for('index'))   
     else:
-        return redirect(url_for('index')) 
-        
+        return render_template('success.html', name = state)
+         
 @app.route('/error/')
 def error():
     data = request.args.get("message", None)
@@ -94,8 +90,6 @@ def signup():
 @app.route('/signin', methods=['POST'])
 def signin():
 
-    global CurrentLoginName #引用全域變數 紀錄目前登入者姓名
-
     if request.method == 'POST':
         account = request.form['account']
         pwd     = request.form['pwd']
@@ -120,8 +114,7 @@ def signin():
 
             # 欄位 password
             if pwd == SignInMemberPwd:
-                session['user'] = "Sign_In"
-                CurrentLoginName = SignInMember[1] # 紀錄目前登入的 使用者姓名
+                session['user'] = SignInMember[1] # 紀錄目前登入的 使用者姓名
                 return redirect(url_for('success')) 
             else:
                 return redirect(url_for('error', message = "帳號、或密碼輸入錯誤"))  
@@ -130,8 +123,7 @@ def signin():
 @app.route('/signout', methods=['GET'])
 def signout():
     if 'user' in session:
-        session['user'] = "Sign_Out"
-        print('[signout]Session key user =', session['user'])
+        session.clear()
     return redirect(url_for('index')) 
 
 if __name__ == "__main__":    
