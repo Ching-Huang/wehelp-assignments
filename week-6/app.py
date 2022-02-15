@@ -36,6 +36,7 @@ def SearchMemberByUsername(username):
             print(UserData)
         return SearchResult
 
+#建立 Flask 物件
 app = Flask(__name__)
 
 #設定 session 的密鑰
@@ -119,7 +120,7 @@ def signin():
             else:
                 return redirect(url_for('error', message = "帳號、或密碼輸入錯誤"))  
 
-
+#處理 登出系統 路由
 @app.route('/signout', methods=['GET'])
 def signout():
     if 'user' in session:
