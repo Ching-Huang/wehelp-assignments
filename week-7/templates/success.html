@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ShiuanChingHuang"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow"> 
+    <meta name="rating" content="General">
+    <base target="_self">
+    <base href="/static/">
+    <meta name="description" content="Python Flask 網站專案"> 
+    <title>Assignment - Week 7</title>
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>歡迎光臨，這是會員頁</h1>
+    </header>
+
+    <main>
+        <form id="member" action="/member/" method="POST">
+            <h2>{{ name }}，歡迎登入系統<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/signout">登出系統</a></h2> 
+        </form>
+
+        <section class="search">
+            <h2>查詢會員姓名</h2>
+
+            <div class="search">
+                <input type="search" class="search"  name="username">
+                <button type="button" id="search">查詢</button>
+            </div>
+
+            <div class="searchResult"></div>
+
+        </section>
+
+        <!-- <section class="modify">
+            <h2>修改會員姓名</h2>
+
+            <div class="modify">
+                <input type="modify" class="modify"  name="username">
+                <button type="button" id="modify">修改</button>
+            </div>
+
+            <div class="modifyStatus"></div>
+
+        </section> -->
+    </main>
+
+    <script src="{{url_for('static', filename='success.js')}}" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+header {
+  width: 100%;
+  height: 10rem;
+  background-color: #003D79;
+  color: #FFFFFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  margin: auto;
+}
+
+main {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+main form h2 {
+  margin-bottom: 1.5rem;
+}
+
+main form label, main form input {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+main form button {
+  font-size: 1rem;
+  width: 4rem;
+  height: 2rem;
+}
+
+main hr {
+  color: #D0D0D0;
+  margin: 40px 0;
+}
+
+main section.search, main section.modify {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 2.5rem;
+}
+
+main section.search h2, main section.modify h2 {
+  margin-bottom: 0.5rem;
+}
+
+main section.search div.search, main section.search div.modify, main section.modify div.search, main section.modify div.modify {
+  width: 100%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main section.search div.search input.search, main section.search div.search input.modify, main section.search div.modify input.search, main section.search div.modify input.modify, main section.modify div.search input.search, main section.modify div.search input.modify, main section.modify div.modify input.search, main section.modify div.modify input.modify {
+  width: 13.5%;
+  height: 2rem;
+  font-size: 1.25rem;
+  padding: 0.4rem 0rem;
+}
+
+main section.search div.search button#search, main section.search div.search button#modify, main section.search div.modify button#search, main section.search div.modify button#modify, main section.modify div.search button#search, main section.modify div.search button#modify, main section.modify div.modify button#search, main section.modify div.modify button#modify {
+  width: 3rem;
+  height: 2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+main section.search div.searchResult, main section.search div.modifyStatus, main section.modify div.searchResult, main section.modify div.modifyStatus {
+  width: 15%;
+  height: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+/*# sourceMappingURL=style.css.map */
