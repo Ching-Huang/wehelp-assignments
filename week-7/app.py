@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, jsonify
 
 # 導入 JSON 模組
 import json
@@ -13,15 +13,15 @@ website = mysql.connector.connect(
 )
 cursor = website.cursor()
 
-# 新增 1 筆會員資料到 database 中
+# [增]新增 1 筆會員資料到 database 中
 # database => member table
-def addNewMemberToDB(name, username, password):
+def AddNewMemberToDB(name, username, password):
     sql = "INSERT INTO member (name, username, password, follower_count) VALUES (%s, %s, %s, %s)"
     member = (name, username, password, 0)
     cursor.execute(sql, member)
     website.commit()
 
-# 讀取 database 資料，查詢 資料庫中有無 此帳號( username )
+# [查]讀取 database 資料，查詢 資料庫中有無 此帳號( username )
 def SearchMemberByUsername(username):
     sql = "SELECT * FROM member WHERE username = %s"
     variable = (username, )
@@ -39,6 +39,33 @@ def SearchMemberByUsername(username):
             print(UserData)
         return SearchResult
 
+# [改]修改該會員姓名(name)
+def ModifyMemberNameByAccount(Account, ModifiedName):
+
+    '''修改該會員的姓名
+
+    修改 資料庫中帳號(欄位名稱 username )所對應的姓名(欄位名稱 name )
+    
+    Example :
+        更改帳號 puppy 的姓名 dog 為 chocho
+        ---------------------------
+        | name       | username   |
+        ---------------------------
+        | dog        | puppy       |
+        ---------------------------
+            
+        >>> ModifyMemberNameByAccount('puppy','chocho')       
+    
+    Args:
+        Account     : 要修改的帳號(username)
+        ModifiedName: 修改後的姓名(name)
+    
+    '''
+    sql = "UPDATE member SET name = %s WHERE username = %s"
+    variable = (ModifiedName, Account)
+    cursor.execute(sql, variable)
+    website.commit()
+    
 #建立 Flask 物件
 app = Flask(__name__)
 
@@ -48,19 +75,19 @@ app.secret_key = "so far so good"
 #網站的首頁
 @app.route('/')
 def index():
-    state = session.get("user")
-    if state != None:
+    MemberName = session.get("user")
+    if MemberName != None:
         return redirect(url_for('success'))
     else:
         return render_template('index.html')
 
 @app.route('/member/')
 def success():
-    state = session.get("user")
-    if state == None:
+    MemberName = session.get("user")
+    if MemberName == None:
         return redirect(url_for('index'))   
     else:
-        return render_template('success.html', name = state)
+        return render_template('success.html', name = MemberName)
          
 @app.route('/error/')
 def error():
@@ -69,7 +96,7 @@ def error():
 
 #處理 註冊帳號 路由
 @app.route('/signup', methods=['POST'])
-def signup():
+def sign_up():
     if request.method == 'POST':
 
         # 讀取 新註冊會員 姓名,帳號,密碼
@@ -83,7 +110,7 @@ def signup():
 
         # 若 無 此會員，則新增資料到 member 資料表，註冊成功，導回【首頁網址】
         if SearchResult == None:
-            addNewMemberToDB(SignUpName, SignUpAccount, SignUpPwd)
+            AddNewMemberToDB(SignUpName, SignUpAccount, SignUpPwd)
             return redirect(url_for('index'))
 
         # 若 有 此會員，則不新增資料，註冊失敗，導向【失敗頁網址】，並顯示「帳號已經被註冊」
@@ -92,7 +119,7 @@ def signup():
 
 #處理 登入系統 路由
 @app.route('/signin', methods=['POST'])
-def signin():
+def sign_in():
 
     if request.method == 'POST':
         account = request.form['account']
@@ -103,7 +130,7 @@ def signin():
 
         # 檢查資料庫的 member 資料表中是否有對應的帳號、密碼
         SearchResult = SearchMemberByUsername(account)
-        print('檢查資料庫',SearchResult)
+        # print('檢查資料庫',SearchResult)
 
         # 帳號密碼 沒有對應，登入失敗，將使用者導向【失敗頁網址】，並顯示「帳號或密碼輸入錯誤」
         if SearchResult == None:
@@ -118,14 +145,15 @@ def signin():
 
             # 欄位 password
             if pwd == SignInMemberPwd:
-                session['user'] = SignInMember[1] # 紀錄目前登入的 使用者姓名
+                session['user']     = SignInMember[1] # 紀錄目前登入的 使用者姓名
+                session['username'] = SignInMember[2] # 紀錄目前登入的 使用者帳號
                 return redirect(url_for('success')) 
             else:
                 return redirect(url_for('error', message = "帳號、或密碼輸入錯誤"))  
 
-#供 前端 使用的 API 路由
+#供 前端 使用的 API 路由 - [查詢會員資料] 
 @app.route('/api/members', methods=['GET'])
-def api():
+def api_search():
     KeyInUsername = request.args.get("username", None)
 
     # 檢查資料庫的 member 資料表中是否有對應的 會員帳號
@@ -154,10 +182,39 @@ def api():
 
         Convert2JsonFormat = json.dumps(PythonFormat, ensure_ascii = False)
         return Convert2JsonFormat
+
+#供 前端 使用的 API 路由 - [修改會員姓名] 
+@app.route('/api/member', methods=['POST']) 
+def api_modify():
     
+    # 取得目前的登入帳號
+    MemberName = session.get("username")
+
+    if MemberName != None: 
+        CurrentUserName = session['username']
+        # print('目前使用者帳號為 = ', CurrentUserName)
+
+    else:  # 未登入時的狀態
+        Response = {"error": 'true'}
+        return jsonify(Response)
+
+    if request.method == 'POST':
+        RequestBody  = request.json  # 取得前端送來的 Request Body 請求資料 
+        ModifiedName = RequestBody['name']  # 取出修改後的 "新姓名"
+        
+        # 修改會員姓名
+        ModifyMemberNameByAccount(CurrentUserName, ModifiedName)
+
+        # 從資料庫中取得修改後的姓名 並更新 session
+        SearchResult = SearchMemberByUsername(CurrentUserName)        
+        session['user'] = SearchResult[0][1] #更新 session 中的姓名 
+
+        Response = {"ok":'true'}
+    return jsonify(Response)
+
 #處理 登出系統 路由
 @app.route('/signout', methods=['GET'])
-def signout():
+def sign_out():
     if 'user' in session:
         session.clear()
     return redirect(url_for('index')) 

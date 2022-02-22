@@ -124,6 +124,7 @@ main section.search div.search, main section.search div.modify, main section.mod
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 main section.search div.search input.search, main section.search div.search input.modify, main section.search div.modify input.search, main section.search div.modify input.modify, main section.modify div.search input.search, main section.modify div.search input.modify, main section.modify div.modify input.search, main section.modify div.modify input.modify {
